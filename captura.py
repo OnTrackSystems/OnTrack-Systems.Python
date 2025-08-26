@@ -45,7 +45,7 @@ def obter_uso():
 
 def salvar_csv():
     df = pd.DataFrame(dados)
-    df.to_csv("ScriptCapturaLCP.csv", encoding="utf-8", index=False)
+    df.to_csv("coletaGeralOTS.csv", encoding="utf-8", index=False)
 
 
 
