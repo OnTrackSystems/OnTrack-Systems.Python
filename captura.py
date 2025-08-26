@@ -58,7 +58,6 @@ def monitoramento():
             print(f"\nData/Hora: {dados['timestamp'][-1]} \nUsuário: {dados["usuario"][-1]} \nUso da CPU: {dados["CPU"][-1]}% \nRAM: {dados["RAM"][-1]} Gb \nDisco usado: {dados["Disco"][-1]} Gb \nPacotes Enviados: {dados["PacotesEnv"][-1]} \nPacotes Recebidos: {dados["PacotesRec"][-1]}\n")
             # print(f"Data/Hora: {dados['timestamp'][-1]} \nUsuário: {dados["usuario"][-1]} \nUso da CPU: {dados["CPU"][-1]}% \nTempo de I/O: {dados["tempoI/O"][-1]}s \nRAM: {dados["RAM"][-1]} Gb \nDisco usado: {dados["Disco"][-1]} Gb \nPacotes Enviados: {dados["PacotesEnv"][-1]} \nPacotes Recebidos: {dados["PacotesRec"][-1]}")
 
-            print(dados)
             salvar_csv()
             time.sleep(5)
 
