@@ -38,7 +38,7 @@ while True:
    
                 #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
                 print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}%")
-                # print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"]} Segundos")
+                # print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"][x]} Segundos")
                 
         elif int(escolha) == 2:
             for x in range(len(filtro["timestamp"])):
@@ -54,7 +54,7 @@ while True:
 
                 #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
                 print(f"{filtro["timestamp"][x]} Uso da CPU: {filtro["CPU"][x]}% || RAM: {filtro["RAM"][x]} Gb || Disco usado: {filtro["Disco"][x]} Gb || Pacotes Enviados: {filtro["PacotesEnv"][x]} || Pacotes Recebidos: {filtro["PacotesRec"][x]}")
-                # print(f"{filtro["timestamp"][x]} Uso da CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"]} Segundos || RAM: {filtro["RAM"][x]} Gb || Disco usado: {filtro["Disco"][x]} Gb || Pacotes Enviados: {filtro["PacotesEnv"][x]} || Pacotes Recebidos: {filtro["PacotesRec"][x]}")
+                # print(f"{filtro["timestamp"][x]} Uso da CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"][x]} Segundos || RAM: {filtro["RAM"][x]} Gb || Disco usado: {filtro["Disco"][x]} Gb || Pacotes Enviados: {filtro["PacotesEnv"][x]} || Pacotes Recebidos: {filtro["PacotesRec"][x]}")
     
 
 
