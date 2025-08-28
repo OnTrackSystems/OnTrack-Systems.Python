@@ -8,7 +8,7 @@ dados = {
     "timestamp": [],
     "usuario": [],
     "CPU": [],
-    #descomente a linha abaixo se estiver no windows
+    #descomente a linha abaixo se estiver no linux
     # "tempoI/O": [],
     "RAM": [],
     "Disco": [],
