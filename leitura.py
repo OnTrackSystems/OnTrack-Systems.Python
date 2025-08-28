@@ -85,7 +85,7 @@ while True:
         minutosAtras = input("\nEscolha de quantos minutos atrás deseja ver: \n")
         ultimosMinX = hora_atual - timedelta(minutes=int(minutosAtras))
         filtroMin = df[df["timestamp"] >= ultimosMinX]
-        filtroGeral(filtroMin)
+        filtroGeral(filtroMin, 0)
         time.sleep(2)
 
 
