@@ -31,26 +31,34 @@ def perguntar():
 
 
 while True:
-    def filtroGeral(filtro):
+
+    def filtroGeral(filtro, inicio):
+
+        for i in range(len(df["timestamp"])):
+            if df["timestamp"][i] >= (inicio - timedelta(seconds=1)):
+                inicioContagem = i
+                break
+
         escolha = escolhaRecurso()
+
         if int(escolha) == 1:
-            for x in range(len(filtro["timestamp"])):
+            for x in range(inicioContagem, len(filtro["timestamp"])):
    
                 #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
-                print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}%")
+                print(f"{filtro["timestamp"][inicioContagem]} Uso de CPU: {filtro["CPU"][inicioContagem]}%")
                 # print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"][x]} Segundos")
                 
         elif int(escolha) == 2:
-            for x in range(len(filtro["timestamp"])):
+            for x in range(inicioContagem, len(filtro["timestamp"])):
                 print(f"{filtro["timestamp"][x]} Uso de RAM: {filtro["RAM"][x]} GB")
         elif int(escolha) == 3:
-            for x in range(len(filtro["timestamp"])):
+            for x in range(inicioContagem, len(filtro["timestamp"])):
                 print(f"{filtro["timestamp"][x]} Uso de disco: {filtro["Disco"][x]} GB")
         elif int(escolha) == 4:
-            for x in range(len(filtro["timestamp"])):
+            for x in range(inicioContagem, len(filtro["timestamp"])):
                 print(f"{filtro["timestamp"][x]} Pacotes enviados: {filtro["PacotesEnv"][x]} || Pacotes recebidos: {filtro["PacotesRec"][x]}")
         elif int(escolha) == 5:
-            for x in range(len(filtro["timestamp"])):
+            for x in range(inicioContagem, len(filtro["timestamp"])):
 
                 #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
                 print(f"{filtro["timestamp"][x]} Uso da CPU: {filtro["CPU"][x]}% || RAM: {filtro["RAM"][x]} Gb || Disco usado: {filtro["Disco"][x]} Gb || Pacotes Enviados: {filtro["PacotesEnv"][x]} || Pacotes Recebidos: {filtro["PacotesRec"][x]}")
@@ -60,14 +68,17 @@ while True:
 
 
     def periodoTempo():
+
         momentoMin_str = input("\nDigite a data/hora minima que deseja nesse formato: (dia/mes/ano hora:minuto): \n")
         momentoMin = datetime.strptime(momentoMin_str, "%d/%m/%Y %H:%M")
         momentoMax_str = input("Digite a data/hora máxima que deseja nesse formato: (dia/mes/ano hora:minuto): \n")
         momentoMax = datetime.strptime(momentoMax_str, "%d/%m/%Y %H:%M")
 
         filtroPeriodo = df[(df["timestamp"] >= momentoMin) & (df["timestamp"] <= momentoMax)]
-        filtroGeral(filtroPeriodo)
+        filtroGeral(filtroPeriodo, momentoMin)
         time.sleep(2)
+
+        
 
 
     def minutosAtras():
