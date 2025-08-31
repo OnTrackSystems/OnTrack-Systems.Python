@@ -32,14 +32,14 @@ def perguntar():
 
 while True:
 
-    def filtroGeral(filtro, inicio, ePeriodo):
+    def filtroGeral(filtro, inicio):
         inicioContagem = inicio
 
-        if ePeriodo == True:
-            for i in range(len(df["timestamp"])):
-                if df["timestamp"][i] >= (inicio - timedelta(seconds=1)):
-                    inicioContagem = i
-                    break
+        
+        for i in range(len(df["timestamp"])):
+            if df["timestamp"][i] >= (inicio - timedelta(seconds=1)):
+                inicioContagem = i
+                break
 
         escolha = escolhaRecurso()
 
@@ -76,10 +76,10 @@ while True:
         momentoMin_str = input("\nDigite a data/hora minima que deseja nesse formato: (dia/mes/ano hora:minuto): \n")
         momentoMin = datetime.strptime(momentoMin_str, "%d/%m/%Y %H:%M")
         momentoMax_str = input("Digite a data/hora máxima que deseja nesse formato: (dia/mes/ano hora:minuto): \n")
-        momentoMax = datetime.strptime(momentoMax_str, "%d/%m/%Y %H:%M")
+        momentoMax = datetime.strptime(momentoMax_str, "%d/%m/%Y %H:%M") + timedelta(minutes=2)
 
-        filtroPeriodo = df[(df["timestamp"] >= momentoMin) & (df["timestamp"] <= momentoMax)]
-        filtroGeral(filtroPeriodo, momentoMin, True)
+        filtroPeriodo = df[(df["timestamp"] >= momentoMin) & (df["timestamp"] < momentoMax)]
+        filtroGeral(filtroPeriodo, momentoMin)
         time.sleep(2)
         
 
@@ -88,9 +88,9 @@ while True:
 
     def minutosAtras():
         minutosAtras = input("\nEscolha de quantos minutos atrás deseja ver: \n")
-        ultimosMinX = hora_atual - timedelta(minutes=int(minutosAtras))
+        ultimosMinX = df["timestamp"][len(df["timestamp"]) - 1] - timedelta(minutes=int(minutosAtras))
         filtroMin = df[df["timestamp"] >= ultimosMinX]
-        filtroGeral(filtroMin, 0, False)
+        filtroGeral(filtroMin, ultimosMinX)
         time.sleep(2)
 
 
