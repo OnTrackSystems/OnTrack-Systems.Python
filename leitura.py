@@ -47,8 +47,8 @@ while True:
             for x in range(inicioContagem, len(filtro["timestamp"])):
    
                 #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
-                print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}%")
-                # print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"][x]} Segundos")
+                # print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}%")
+                print(f"{filtro["timestamp"][x]} Uso de CPU: {filtro["CPU"][x]}% || tempo de I/O: {filtro["tempoI/O"][x]} Segundos")
                 
         elif int(escolha) == 2:
             for x in range(inicioContagem, len(filtro["timestamp"])):
