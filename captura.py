@@ -14,7 +14,9 @@ dados = {
     "RAM_Percent": [],
     "Disco": [],
     "PacotesEnv": [],
-    "PacotesRec": []
+    "PacotesRec": [],
+    "Num_processos": []
+
 }
 
 
@@ -26,6 +28,7 @@ def obter_uso():
     disco = ps.disk_usage('/')
     rede = ps.net_io_counters(pernic=False, nowrap=True)
     usuario = ps.users()
+    num_processos = len(list(ps.process_iter()))
     user = usuario[0].name
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -38,6 +41,7 @@ def obter_uso():
     dados["Disco"].append(round(disco.used / 1024 ** 3))
     dados["PacotesEnv"].append(rede.packets_sent)
     dados["PacotesRec"].append(rede.packets_recv)
+    dados["Num_processos"].append(num_processos)
     
     #Descomente a linha abaixo se estiver em um linux
     #dados["tempoI/O"].append(cpu.iowait)
@@ -57,10 +61,10 @@ def monitoramento():
 
             #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
             # print(f"Data/Hora: {dados['timestamp'][-1]} \nUsuário: {dados["usuario"][-1]} \nUso da CPU: {dados["CPU"][-1]}% \nTempo de I/O: {dados["tempoI/O"][-1]}s \nRAM: {dados["RAM"][-1]} Gb \nDisco usado: {dados["Disco"][-1]} Gb \nPacotes Enviados: {dados["PacotesEnv"][-1]} \nPacotes Recebidos: {dados["PacotesRec"][-1]}")
-            print(f"\nData/Hora: {dados['timestamp'][-1]} \nUsuário: {dados['usuario'][-1]} \nUso da CPU: {dados['CPU'][-1]}% \nRAM: {dados['RAM'][-1]} Gb \nPercentual de uso de RAM: {dados['RAM_Percent'][-1]}% \nDisco usado: {dados['Disco'][-1]} Gb \nPacotes Enviados: {dados['PacotesEnv'][-1]} \nPacotes Recebidos: {dados['PacotesRec'][-1]}\n")
+            print(f"\nData/Hora: {dados['timestamp'][-1]} \nUsuário: {dados['usuario'][-1]} \nUso da CPU: {dados['CPU'][-1]}% \nRAM: {dados['RAM'][-1]} Gb \nPercentual de uso de RAM: {dados['RAM_Percent'][-1]}% \nDisco usado: {dados['Disco'][-1]} Gb \nPacotes Enviados: {dados['PacotesEnv'][-1]} \nPacotes Recebidos: {dados['PacotesRec'][-1]} \nQuantidade de processos: {dados['Num_processos'][-1]}\n")
 
             salvar_csv()
-            time.sleep(5)
+            time.sleep(1)
 
     except KeyboardInterrupt:
         resposta = input(str("\nVocê deseja parar o monitoramento? (s/n): ")).strip().lower()

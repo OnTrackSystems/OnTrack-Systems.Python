@@ -1,3 +1,2 @@
-timestamp,usuario,CPU,RAM,RAM_Percent,Disco,PacotesEnv,PacotesRec
-2025-10-01 10:40:32,pedro,1.0,11,34.1,133,66374,164055
-2025-10-01 10:40:38,pedro,8.6,11,34.1,133,66394,164356
+timestamp,usuario,CPU,RAM,RAM_Percent,Disco,PacotesEnv,PacotesRec,Num_processos
+2025-10-01 10:56:32,pedro,21.3,15,48.4,133,111089,265399,228
