@@ -11,6 +11,7 @@ dados = {
     #descomente a linha abaixo se estiver no linux
     #"tempoI/O": [],
     "RAM": [],
+    "RAM_Percent": [],
     "Disco": [],
     "PacotesEnv": [],
     "PacotesRec": []
@@ -21,6 +22,7 @@ def obter_uso():
     cpu = ps.cpu_times(percpu=False)
     cpuPercent = ps.cpu_percent(interval=1)
     RAM = ps.virtual_memory()
+    RAM_Percent = ps.virtual_memory().percent
     disco = ps.disk_usage('/')
     rede = ps.net_io_counters(pernic=False, nowrap=True)
     usuario = ps.users()
@@ -28,12 +30,11 @@ def obter_uso():
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
-
-
     dados["timestamp"].append(timestamp)
     dados["usuario"].append(user)
     dados["CPU"].append(cpuPercent)
     dados["RAM"].append(round(RAM.used / 1024 ** 3))
+    dados["RAM_Percent"].append(RAM_Percent)
     dados["Disco"].append(round(disco.used / 1024 ** 3))
     dados["PacotesEnv"].append(rede.packets_sent)
     dados["PacotesRec"].append(rede.packets_recv)
@@ -55,8 +56,8 @@ def monitoramento():
             obter_uso()
 
             #Abaixo existe duas formas de exibição. Se estiver em linux comente o primeiro e descomente o segundo
-            print(f"\nData/Hora: {dados['timestamp'][-1]} \nUsuário: {dados['usuario'][-1]} \nUso da CPU: {dados['CPU'][-1]}% \nRAM: {dados['RAM'][-1]} Gb \nDisco usado: {dados['Disco'][-1]} Gb \nPacotes Enviados: {dados['PacotesEnv'][-1]} \nPacotes Recebidos: {dados['PacotesRec'][-1]}\n")
             # print(f"Data/Hora: {dados['timestamp'][-1]} \nUsuário: {dados["usuario"][-1]} \nUso da CPU: {dados["CPU"][-1]}% \nTempo de I/O: {dados["tempoI/O"][-1]}s \nRAM: {dados["RAM"][-1]} Gb \nDisco usado: {dados["Disco"][-1]} Gb \nPacotes Enviados: {dados["PacotesEnv"][-1]} \nPacotes Recebidos: {dados["PacotesRec"][-1]}")
+            print(f"\nData/Hora: {dados['timestamp'][-1]} \nUsuário: {dados['usuario'][-1]} \nUso da CPU: {dados['CPU'][-1]}% \nRAM: {dados['RAM'][-1]} Gb \nPercentual de uso de RAM: {dados['RAM_Percent'][-1]}% \nDisco usado: {dados['Disco'][-1]} Gb \nPacotes Enviados: {dados['PacotesEnv'][-1]} \nPacotes Recebidos: {dados['PacotesRec'][-1]}\n")
 
             salvar_csv()
             time.sleep(5)
